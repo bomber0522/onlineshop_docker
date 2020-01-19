@@ -1,11 +1,11 @@
 class MembersController < ApplicationController
 
   def index
-    
+    @members = Member.paginate(page: params[:page], per_page: 15)
   end
 
   def show
-    
+    @member = Member.find(params[:id])
   end
 
   def new
@@ -27,7 +27,11 @@ class MembersController < ApplicationController
   end
 
   def update
-    
+    if @member.update_attributes(member_params)
+      redirect_to @member, notice: "変更が完了しました。"
+    else
+      render 'edit'
+    end
   end
 
   def destroy
