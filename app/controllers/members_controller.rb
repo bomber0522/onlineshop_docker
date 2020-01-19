@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
-  before_action :logged_in_member, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_member, only: [:index, :edit, :update, :destroy,
+                                        :following, :followers]
   before_action :correct_member, only: [:edit, :update]
 
   def index
@@ -8,6 +9,7 @@ class MembersController < ApplicationController
 
   def show
     @member = Member.find(params[:id])
+    @entries = @member.entries.paginate(page: params[:page], per_page: 3)
   end
 
   def new
@@ -18,14 +20,14 @@ class MembersController < ApplicationController
     @member = Member.new(member_params)
     if @member.save
       @member.send_activation_email
-      redirect_to :root, notice: "認証メールを送りましたので「Activate」をクリックしてください。"
+      redirect_to :root, notice: "認証確認メール送りましたので「Activate」をクリックしてください。"
     else
       render "new"
     end
   end
 
   def edit
-    
+
   end
 
   def update
@@ -44,8 +46,8 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:mamber).permit(:new_profile_picture, :remove_profile_picture,
-                   :name, :email, :pssword, :password_confirmation, :profile)
+    params.require(:member).permit(:new_profile_picture, :remove_profile_picture,
+                    :name, :email, :password, :password_confirmation, :profile)
   end
 
   def logged_in_member
