@@ -11,16 +11,8 @@
     <th class="profile-user" colspan="2"><%= f.label :new_profile_picture %></th>
   </tr>
   <tr>
-    <td class="prof-content" colspan="12">
-      <% if @member.new_profile_picture.attached? %>
-        <div class="image-pic">
-          <%= image_tag @member.new_profile_picture.variant(resize: "128x128") %>
-          <%= f.check_box :remove_profile_pictrue, :class => "chkbox" %>
-          <%=  f.label :remove_profile_pictrue %>
-        </div>
-      <% else %>
-        <div class="no-pic">画像はありません。</div>
-      <% end %>
+    <td class="prof-content" colspan="2">
+
     </td>
   </tr>
   <tr>
@@ -30,7 +22,7 @@
     <td class="profile-user" colspan="2"><%= f.password_field :password, class: 'form-control' %></td>
   </tr>
   <tr>
-    <th class="profile-user" colspan="2"><%= f.label :passoword_confirmation %></th>
+    <th class="profile-user" colspan="2"><%= f.label :password_confirmation %></th>
   </tr>
   <tr>
     <td class="profile-user" colspan="2"><%= f.password_field :password_confirmation, class: 'form-control' %></td>
