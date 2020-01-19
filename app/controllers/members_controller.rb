@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  before_action :logged_in_member, only: [:index, :edit, :update, :destroy]
+  before_action :correct_member, only: [:edit, :update]
 
   def index
     @members = Member.paginate(page: params[:page], per_page: 15)
@@ -35,7 +37,8 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    
+    Member.find(params[:id]).destroy
+    redirect_to :members, notice: "会員を削除しました。"
   end
 
   private
@@ -43,5 +46,17 @@ class MembersController < ApplicationController
   def member_params
     params.require(:mamber).permit(:new_profile_picture, :remove_profile_picture,
                    :name, :email, :pssword, :password_confirmation, :profile)
+  end
+
+  def logged_in_member
+    unless logged_in?
+      store_location
+      redirect_to login_url, notice: "ログインしてください。"
+    end
+  end
+
+  def correct_member
+    @member = Member.find(params[:id])
+    redirect_to(root_url) unless current_member?(@member)
   end
 end
