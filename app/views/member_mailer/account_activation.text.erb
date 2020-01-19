@@ -1,3 +1,5 @@
-Member#account_activation
+Hi <%= @member.name %>,
 
-<%= @greeting %>, find me in app/views/member_mailer/account_activation.text.erb
+Welcome to the For helth product! Click on the link below to activate your account:
+
+<%= edit_account_activation_url(@member.activation_token, email: @member.email) %>

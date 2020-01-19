@@ -1,5 +1,10 @@
-<h1>Member#account_activation</h1>
+<h1>For helth product</h1>
+
+<p>Hi <%= @member.name %>,</p>
 
 <p>
-  <%= @greeting %>, find me in app/views/member_mailer/account_activation.html.erb
+Welcome to the For helth product! Click on the link below to activate your account:
 </p>
+
+<%= link_to "Activate", edit_account_activation_url(@member.activation_token,
+                              email: @member.email) %>
