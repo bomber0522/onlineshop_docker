@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :crate, :edit, :update]
+  resources :articles, only: [:index, :show]
 end
