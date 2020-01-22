@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :articles, only: [:index, :show]
-  resources :entries
-  resources :images, controller: "entry_image"
+  resources :entries do
+    resources :images, controller: "entry_image" do
+      patch :move_higher, :move_lower, on: :member
+    end
+  end
 end
