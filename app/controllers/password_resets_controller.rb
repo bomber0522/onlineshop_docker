@@ -1,4 +1,7 @@
 class PasswordResetsController < ApplicationController
+  before_action :get_member, only: [:edit, :update]
+  before_action :valid_member, only: [:edit, :update]
+  before_action :check_expiration, only: [:edit, :update]
 
   def new
     
@@ -38,5 +41,22 @@ class PasswordResetsController < ApplicationController
 
   def member_params
     params.require(:member).permit(:password, :password_confirmation)
+  end
+
+  def get_member
+    @member = Member.find_by(email: params[:email])
+  end
+
+  def valid_member
+    unless (@member && @member.activated? &&
+            @member.authenticated?(:reset, params[:id]))
+      redirect_to :root
+    end
+  end
+
+  def check_expiration
+    if @member.password_reset_expired?
+      redirect_to :new_password_reset, notice: "Password reset has expired."
+    end
   end
 end
