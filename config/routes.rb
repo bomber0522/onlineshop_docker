@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   end
 
   resources :account_activations, only: [:edit]
-  resources :password_resets,     only: [:new, :crate, :edit, :update]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :articles, only: [:index, :show]
+  resources :entries
+  resources :images, controller: "entry_image"
 end

@@ -23,6 +23,7 @@ gem 'rails_autolink'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bcrypt', '~> 3.1.7'
 gem 'pry-rails'
+gem 'mini_magick', '~> 4.8'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
