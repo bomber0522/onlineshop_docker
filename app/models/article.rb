@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
   validates :title, :body, :released_at, presence: true
   validates :title, length: { maximum: 80 }
-  validates :title, length { maximum: 2000 }
+  validates :title, length: { maximum: 2000 }
 
   has_one_attached :info_picture
   attribute :new_info_picture
