@@ -66,7 +66,7 @@ class Member < ApplicationRecord
   end
 
   def send_activation_email
-    MemverMailer.account_activation(self).deliver_now
+    MemberMailer.account_activation(self).deliver_now
   end
 
   def create_reset_digest
