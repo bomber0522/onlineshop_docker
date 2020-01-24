@@ -57,7 +57,7 @@ class EntriesController < ApplicationController
   end
 
   def unlike
-    current.voted_entries.destroy(Entry.find(params[:id]))
+    current_member.voted_entries.destroy(Entry.find(params[:id]))
     redirect_to :voted_entries, notice: "削除しました。"
   end
 
