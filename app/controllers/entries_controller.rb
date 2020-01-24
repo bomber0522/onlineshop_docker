@@ -21,7 +21,7 @@ class EntriesController < ApplicationController
   end
 
   def edit
-    @entry = current_member.entries(params[:id])
+    @entry = current_member.entries.find(params[:id])
   end
 
   def update
