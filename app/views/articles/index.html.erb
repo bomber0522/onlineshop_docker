@@ -1,5 +1,6 @@
 <% provide(:title, "Articles") %>
   <h1>新着情報一覧</h1>
+
 <% if @articles.present? %>
   <% @articles.each do |article| %>
     <h2><%= article.title %></h2>
