@@ -1,6 +1,6 @@
 <% render "shared/errors", obj: @image %>
 
-<table>
+<table class="attr" border="2">
   <tr>
     <th class="pic-info" width="100"><%= form.label :new_data %></th>
     <td><%= form.file_field :new_data, :class => "btn btn-data" %></td>

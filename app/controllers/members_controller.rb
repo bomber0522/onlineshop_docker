@@ -4,12 +4,12 @@ class MembersController < ApplicationController
   before_action :correct_member, only: [:edit, :update]
 
   def index
-    @members = Member.paginate(page: params[:page], per_page: 15)
+    @members = Member.page(params[:page]).per(15)
   end
 
   def show
     @member = Member.find(params[:id])
-    @entries = @member.entries.paginate(page: params[:page], per_page: 3)
+    @entries = @member.entries.page(params[:page]).per(3)
   end
 
   def new
@@ -46,14 +46,14 @@ class MembersController < ApplicationController
   def following
     @title = "Following"
     @member  = Member.find(params[:id])
-    @members = @member.following.paginate(page: params[:page], per_page: 10)
+    @members = @member.following.page(params[:page]).per(10)
     render 'show_follow'
   end
 
   def followers
     @title = "Followers"
     @member  = Member.find(params[:id])
-    @members = @member.followers.paginate(page: params[:page], per_page: 3)
+    @members = @member.followers.page(params[:page]).per(3)
     render 'show_follow'
   end
 
