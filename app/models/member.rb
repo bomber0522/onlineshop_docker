@@ -10,7 +10,6 @@ class Member < ApplicationRecord
   has_secure_password
 
   has_many :entries, dependent: :destroy
-  has_many :votes, dependent: :destroy
   has_many :active_relationships,  class_name:  "Relationship",
                                    foreign_key: "follower_id",
                                    dependent:   :destroy
@@ -19,6 +18,7 @@ class Member < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :votes, dependent: :destroy
   has_many :voted_entries, through: :votes, source: :entry
   has_one_attached :profile_picture
   attribute :new_profile_picture
@@ -37,7 +37,7 @@ class Member < ApplicationRecord
   end
 
   def Member.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MINCOST :
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                               BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
@@ -54,7 +54,7 @@ class Member < ApplicationRecord
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
-    BCcrypt::Password.new(digest).is_password?(token)
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   before_save do
@@ -70,7 +70,7 @@ class Member < ApplicationRecord
   end
 
   def activate
-    update_attribute(:activate, true)
+    update_attribute(:activated, true)
     update_attribute(:activated_at, Time.zone.now)
   end
 
@@ -81,7 +81,7 @@ class Member < ApplicationRecord
   def create_reset_digest
     self.reset_token = Member.new_token
     update_attribute(:reset_digest, Member.digest(reset_token))
-    update_attribute(:rest_sent_at, Time.zone.now)
+    update_attribute(:reset_sent_at, Time.zone.now)
   end
 
   def send_password_reset_email
