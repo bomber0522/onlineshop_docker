@@ -5,7 +5,7 @@
 <% if current_member %>
   <ul class="toolbar">
     <%= menu_link_to "ブログ記事の作成", :new_entry %>
-    <%= menu_link_to "いいね！したブログ", "#" %>
+    <%= menu_link_to "いいね！したブログ", :voted_entries %>
   </ul>
 <% end %>
 

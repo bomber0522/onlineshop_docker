@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :articles, only: [:index, :show]
   resources :entries do
-    resources :images, controller: "entry_image" do
+    patch :like, :unlike, on: :member
+    get :voted, on: :collection
+    resources :images, controller: "entry_images" do
       patch :move_higher, :move_lower, on: :member
     end
   end
