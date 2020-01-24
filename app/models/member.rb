@@ -91,6 +91,6 @@ class Member < ApplicationRecord
 
   def create_activation_digest
     self.activation_token = Member.new_token
-    slef.create_activation_digest = Member.digest(activation_token)
+    self.activation_digest = Member.digest(activation_token)
   end
 end
