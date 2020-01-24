@@ -12,7 +12,15 @@
   </tr>
   <tr>
     <td class="prof-content" colspan="2">
-
+      <% if @member.new_profile_picture.attached? %>
+        <div class="image-pic">
+          <%= image_tag @member.new_profile_picture.variant(resize: "128x128") %>
+          <%= f.check_box :remove_profile_picture, :class => "chkbox" %>
+          <%= f.label :remove_profile_picture %>
+        </div>
+      <% else %>
+        <div class="no-pic">画像はありません。</div>
+      <% end %>
     </td>
   </tr>
   <tr>
