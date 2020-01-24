@@ -11,8 +11,15 @@ class Member < ApplicationRecord
 
   has_many :entries, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :active_relationships,  class_name:  "Relationship",
+                                   foreign_key: "follower_id",
+                                   dependent:   :destroy
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+  has_many :following, through: :active_relationships,  source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
   has_many :voted_entries, through: :votes, source: :entry
-
   has_one_attached :profile_picture
   attribute :new_profile_picture
   attribute :remove_profile_picture, :boolean
@@ -87,6 +94,18 @@ class Member < ApplicationRecord
 
   def votable_for?(entry)
     entry && entry.author != self && !votes.exists?(entry_id: entry.id)
+  end
+
+  def follow(other_member)
+    following << other_member
+  end
+
+  def unfollow(other_member)
+    active_relationships.find_by(followed_id: other_member.id).destroy
+  end
+
+  def following?(other_member)
+    following.include?(other_member)
   end
 
   private
