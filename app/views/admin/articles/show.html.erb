@@ -6,7 +6,7 @@
 <table class="attr" border="1">
   <tr>
     <th class="article-name" width="100">タイトル</th>
-    <td><%= article.title %></td>
+    <td><%= @article.title %></td>
   </tr>
     <th class="pic-info">記事画像</th>
     <td>
@@ -16,7 +16,7 @@
     </td>
   <tr>
     <th>本文</th>
-    <td><%= @article.body %></td>  
+    <td><%= @article.body %></td>
   </tr>
   <tr>
     <th class="start-date">掲載開始日時</th>
@@ -24,10 +24,10 @@
   </tr>
   <tr>
     <th class="start-date">掲載終了日時</th>
-    <td><%= @article.expired_at.try(:strftime, "%Y/%M/%d %H:%M") %></td>
+    <td><%= @article.expired_at.try(:strftime, "%Y/%m/%d %H:%M") %></td>
   </tr>
   <tr>
     <th>会員限定</th>
-    <td class="article-name"><%= @ariticle.member_only? ? "◯" : "-" %></td>
+    <td class="article-name"><%= @article.member_only? ? "○" : "－" %></td>
   </tr>
 </table>

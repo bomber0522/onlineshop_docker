@@ -31,13 +31,13 @@
           <td>
             <div class="entries-post-image">
               <%= link_to "編集", edit_entry_image_path(@entry, image) %> |
-              <%= link_to "削除", entry_entry_image_path(@entry, image),
-                  method: :delete, data: { confirm: "本当に削除しますか？" } %>
+              <%= link_to "削除", entry_image_path(@entry, image),
+                method: :delete, data: { confirm: "本当に削除しますか？" } %>
             </div>
             <div class="image-down_up">
-                <%= link_to_unless image.first?, "上へ",
-                    move_higer_entry_image_path(@entry, image),
-                    method: :patch %> |
+              <%= link_to_unless image.first?, "上へ",
+                move_higher_entry_image_path(@entry, image),
+                method: :patch %> |
                     <%= link_to_unless image.last?, "下へ",
                         move_lower_entry_image_path(@entry, image),
                         method: :patch %>

@@ -1,4 +1,4 @@
-$(document).on("turbolinks: load", function() {
+$(document).on("turbolinks:load", function() {
   var cbox = $("#article_no_expiration");
   var field = $(".article_expired_at");
 

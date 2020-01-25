@@ -3,7 +3,7 @@ names = %w(Bomber Pepe Kaira Rikito Jun Dave Rob Ken Ichiro Mie)
   Member.create(
     name: names[idx],
     email: "#{names[idx]}@example.com",
-    # admin: (idx == 0),
+    admin: (idx == 0),
     password: "djbomber",
     password_confirmation: "djbomber",
     activated: true,
@@ -13,9 +13,9 @@ end
 
 0.upto(29) do |idx|
   Member.create(
-    name: "Pepe#{idx + 1}@example.com",
-    email: "Pepe#{idx + 1}@example.com",
-    # admin: false,
+    name: "Pepe#{idx + 1}",
+    email: "Pepe#{idx+1}@example.com",
+    admin: false,
     password: "password",
     password_confirmation: "password",
     activated: true,
@@ -41,7 +41,7 @@ end
 
 0.upto(29) do |idx|
   Article.create(
-    title: "Article#{idx + 10}",
+    title: "Article#{idx+10}",
     body: "blah, blah, blah...",
     released_at: 100.days.ago.advance(days: idx),
     expired_at: nil,

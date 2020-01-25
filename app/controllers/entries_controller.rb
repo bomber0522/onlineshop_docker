@@ -64,7 +64,7 @@ class EntriesController < ApplicationController
   def voted
     @entries = current_member.voted_entries.published
       .order("votes.created_at DESC")
-      .paginate(page: params[:page], per_page: 15)
+      .page(params[:page]).per(15)
   end
 
   private
