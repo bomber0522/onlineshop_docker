@@ -220,7 +220,6 @@ GEM
     sassc (2.2.1)
       ffi (~> 1.9)
     shellany (0.0.1)
-
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
