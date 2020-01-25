@@ -18,6 +18,9 @@
         </li>
     </ul>
   </li>
+    <% if current_member.admin? %>
+      <%= menu_link_to "管理ページ", :admin_root %>
+    <% end %>
     <% end %>
   </ul>
 </nav>

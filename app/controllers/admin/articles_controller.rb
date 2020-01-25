@@ -3,12 +3,12 @@ class Admin::ArticlesController < Admin::Base
   # 記事一覧
   def index
     @articles = Article.order(released_at: :desc)
-      .paginate(page: params[:page], per_page: 10)
+    .page(params[:page]).per(10)
   end
 
   # 記事詳細
   def show
-    @ariticle = Article.find(params[:id])
+    @article = Article.find(params[:id])
   end
 
   # 新規登録フォーム
