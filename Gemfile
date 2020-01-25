@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'acts_as_list'
+gem 'aws-sdk-s3', require: false
 gem 'rails-i18n'
 gem 'kaminari'
 gem 'kaminari-i18n'
