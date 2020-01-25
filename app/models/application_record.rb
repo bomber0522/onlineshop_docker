@@ -3,6 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   ALLOWED_CONTENT_TYPES = %q{
     image/jpeg
+    image/jpg
     image/png
     image/gif
     image/bmp

@@ -36,19 +36,19 @@ class EntryImagesController < ApplicationController
     if @image.save
       redirect_to [@entry, :images], notice: "画像を更新しました。"
     else
-      render "edit"
+      render "eidt"
     end
   end
 
   def destroy
     @image = @entry.images.find(params[:id])
     @image.destroy
-    redirect_to [@entry, :image], notice: "画像を削除しました。"
+    redirect_to [@entry, :images], notice: "画像を削除しました。"
   end
 
-  def move_higer
+  def move_higher
     @image = @entry.images.find(params[:id])
-    @image.move_higer
+    @image.move_higher
     redirect_back fallback_location: [@entry, :images]
   end
 
@@ -57,7 +57,7 @@ class EntryImagesController < ApplicationController
     @image.move_lower
     redirect_back fallback_location: [@entry, :images]
   end
-
+  
   private
 
   def image_params
